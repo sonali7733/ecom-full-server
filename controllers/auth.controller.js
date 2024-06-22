@@ -14,6 +14,7 @@ exports.registerAdmin = asyncHandler(async (req, res) => {
     await Admin.create({ name, email, password: hash })
     res.json({ message: "Admin Register Success" })
 })
+
 exports.loginAdmin = asyncHandler(async (req, res) => {
     const { email, password } = req.body
     const found = await Admin.findOne({ email })
@@ -48,6 +49,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     const hash = await bcrypt.hash(password, 10)
     await User.create({ name, email, password: hash })
 })
+
 exports.loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body
     const found = await User.findOne({ email })
@@ -72,6 +74,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
         }
     })
 })
+
 exports.logoutAdmin = asyncHandler(async (req, res) => {
     res.clearCookie("admin")
     res.json({ message: "Admin Logout Success" })
